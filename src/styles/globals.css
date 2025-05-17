@@ -1,20 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Eagle+Lake&display=swap');
-
 @import "tailwindcss";
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-:root {
-
-  --background: #ffffff;
-  --foreground: #171717;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: 'Eagle Lake', sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -25,8 +17,36 @@
 }
 
 body {
-  background: var(--background) url('../images/fondo.png') no-repeat center center fixed;
-  background-size: cover;
+  background: var(--background) url('/images/fondo.png') no-repeat center center fixed;
+  background-size: 1500px 750px;
   color: var(--foreground);
-  font-family: 'Eagle Lake', sans-serif;
+  font-family: var(--font-sans);
+}
+
+/* 🎨 Clases personalizadas de estilo */
+
+.text-glow {
+  color: #DAA85B;
+  text-shadow: 0 0 0px #fff700, 0 0 20px #ffd700;
+}
+
+.text-subtle-glow {
+  text-shadow: 0 0 6px #fff700;
+}
+
+.btn-link {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  border-width: 1px;
+  border-color: #ffffff;
+  font-weight: 600;
+  border-radius: 0.375rem;
+  transition: all 0.2s;
+}
+
+.btn-link:hover {
+  background-color: #f3e8ff;
+  color: #6d28d9;
 }

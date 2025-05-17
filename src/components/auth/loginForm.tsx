@@ -1,8 +1,7 @@
-// src/components/auth/LoginForm.tsx
 import { useState } from "react";
-import Input from "../ui/input";
+import Input from "@/components/ui/input";
 import Button from "@/components/ui/button";
-import { login } from "@/services/authService"; // cuando esté implementado
+import { login } from "@/services/authService";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -16,14 +15,13 @@ export default function LoginForm() {
     try {
       const res = await login(email, password);
       console.log("Login exitoso:", res);
-      // Aquí podrías guardar el token, redirigir, etc.
     } catch (err: any) {
       setError("Credenciales inválidas o error del servidor.");
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-sm mx-auto space-y-4">
+    <form onSubmit={handleSubmit} className="space-y-4 text-white">
       <Input
         label="Correo"
         type="email"
@@ -38,8 +36,10 @@ export default function LoginForm() {
         onChange={(e) => setPassword(e.target.value)}
         required
       />
-      {error && <p className="text-red-500 text-sm">{error}</p>}
-      <Button type="submit">Iniciar sesión</Button>
+      {error && <p className="text-red-400 text-sm">{error}</p>}
+      <Button type="submit" className="w-full bg-yellow-500 hover:bg-yellow-400 text-black">
+        Iniciar sesión
+      </Button>
     </form>
   );
 }
