@@ -10,7 +10,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
       <Sidebar />
       <div className="ml-64 flex flex-col min-h-screen w-full">
         <Header />
-        <main className="flex-1 p-6 bg-white">{children}</main>
+        <main className="flex-1 p-6" style={{ backgroundColor: "#581304" }}>{children}</main>
         <Footer />
       </div>
     </div>

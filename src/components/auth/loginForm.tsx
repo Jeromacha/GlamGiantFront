@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import Input from "@/components/ui/input";
 import Button from "@/components/ui/button";
 import { login } from "@/services/authService";
 
 export default function LoginForm() {
+  const router = useRouter();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -14,8 +17,16 @@ export default function LoginForm() {
 
     try {
       const res = await login(email, password);
+
+      // ✅ Guardar token
+      localStorage.setItem("token", res.access_token);
+
       console.log("Login exitoso:", res);
+
+      // ✅ Redirigir al dashboard
+      router.push("/dashboard/admin");
     } catch (err: any) {
+      console.error("Error login:", err.response?.data || err.message);
       setError("Credenciales inválidas o error del servidor.");
     }
   };
@@ -37,7 +48,10 @@ export default function LoginForm() {
         required
       />
       {error && <p className="text-red-400 text-sm">{error}</p>}
-      <Button type="submit" className="w-full bg-yellow-500 hover:bg-yellow-400 text-black">
+      <Button
+        type="submit"
+        className="w-full bg-yellow-500 hover:bg-yellow-400 text-black"
+      >
         Iniciar sesión
       </Button>
     </form>

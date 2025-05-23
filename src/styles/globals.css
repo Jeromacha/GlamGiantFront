@@ -17,8 +17,8 @@
 }
 
 body {
-  background: var(--background) url('/images/fondo.png') no-repeat center center fixed;
-  background-size: 1500px 750px;
+  background: var(--background) url('/images/fondo7.png') no-repeat center center fixed;
+  background-size: 1490px 780px;
   color: var(--foreground);
   font-family: var(--font-sans);
 }

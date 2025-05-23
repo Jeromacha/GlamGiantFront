@@ -20,8 +20,8 @@ export default function Sidebar() {
           <Link
             key={link.href}
             href={link.href}
-            className={`px-3 py-2 rounded-md hover:bg-[#4B0E20] transition ${
-              router.pathname === link.href ? "bg-[#4B0E20] text-[#FFD700]" : ""
+            className={`px-3 py-2 rounded-md hover:bg-[#330800] transition ${
+              router.pathname === link.href ? "bg-[#330800] text-[#FFD700]" : ""
             }`}
           >
             {link.label}
