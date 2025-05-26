@@ -16,7 +16,7 @@ const testerTypes = ["NORMAL", "DWARF", "SPECIAL"];
 
 export default function UserForm({ user, onSuccess }: Props) {
   const [formData, setFormData] = useState({
-    name: "",
+    nombre: "",
     email: "",
     password: "",
     rol: "CLIENT",
@@ -31,7 +31,7 @@ export default function UserForm({ user, onSuccess }: Props) {
   useEffect(() => {
     if (user) {
       setFormData({
-        name: user.nombre || user.nombre|| "",
+        nombre: user.nombre|| "",
         email: user.email || "",
         password: "",
         rol: user.rol || "CLIENT",
@@ -95,7 +95,7 @@ export default function UserForm({ user, onSuccess }: Props) {
     <form onSubmit={handleSubmit} className="space-y-4 text-white">
       {error && <p className="text-red-400 text-sm">{error}</p>}
 
-      <Input label="Nombre" name="name" value={formData.name} onChange={handleChange} required />
+      <Input label="Nombre" name="nombre" value={formData.nombre} onChange={handleChange} required />
       <Input label="Correo" name="email" value={formData.email} onChange={handleChange} required type="email" />
       <Input label="Contraseña" name="password" value={formData.password} onChange={handleChange} required type="password" />
 
