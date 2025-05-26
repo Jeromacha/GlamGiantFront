@@ -1,13 +1,13 @@
-
-export type UserRole = "Admin" | "Client" | "Tester" | "Employee";
+import { UserRole } from "@/types/enums/user-role.enum";
+import { TesterType } from "@/types/enums/tester-type.enum";
 
 export interface User {
   id: string;
-  name: string;
+  nombre: string;
   email: string;
-  password?: string; // solo se usa en registro/login
-  role: UserRole;
-  test_subject_status: boolean;
-  allergic_reactions: string;
-  purchase_history: string[]; // IDs de órdenes
+  rol: UserRole;
+  tester_type?: TesterType;
+  test_subject_status?: boolean;
+  allergic_reactions?: string;
+  purchase_history?: string[];
 }

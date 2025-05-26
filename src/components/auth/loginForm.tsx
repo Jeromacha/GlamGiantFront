@@ -50,7 +50,7 @@ export default function LoginForm() {
       {error && <p className="text-red-400 text-sm">{error}</p>}
       <Button
         type="submit"
-        className="w-full bg-yellow-500 hover:bg-yellow-400 text-black"
+        className="w-full  text-black"
       >
         Iniciar sesión
       </Button>

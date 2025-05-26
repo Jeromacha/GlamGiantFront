@@ -24,7 +24,12 @@ body {
 }
 
 /* 🎨 Clases personalizadas de estilo */
-
+.bg-glamYellow{
+  background-color: #DAA85B;
+}
+.text-title{
+  color:#DAA85B
+}
 .text-glow {
   color: #DAA85B;
   text-shadow: 0 0 0px #fff700, 0 0 20px #ffd700;

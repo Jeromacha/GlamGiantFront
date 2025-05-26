@@ -50,7 +50,7 @@ export default function ProductsPage() {
   return (
     <DashboardLayout>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-xl font-bold text-yellow-300">Productos</h1>
+        <h1 className="text-xl font-bold text-title">Productos</h1>
         <Button onClick={handleCreate}>Agregar producto</Button>
       </div>
 
