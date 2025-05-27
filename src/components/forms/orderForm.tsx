@@ -12,7 +12,6 @@ interface Props {
   onSuccess: () => void;
 }
 
-
 const paymentOptions = ["Paid", "Refunded", "Failed"];
 
 export default function OrderForm({ order, clients, products, onSuccess }: Props) {
@@ -47,12 +46,19 @@ export default function OrderForm({ order, clients, products, onSuccess }: Props
     }));
   };
 
-  const handleProductSelection = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedOptions = Array.from(e.target.selectedOptions).map((opt) => opt.value);
-    setFormData((prev) => ({
-      ...prev,
-      productIds: selectedOptions,
-    }));
+  const handleProductCheckbox = (productId: string) => {
+    setFormData((prev) => {
+      const selected = new Set(prev.productIds);
+      if (selected.has(productId)) {
+        selected.delete(productId);
+      } else {
+        selected.add(productId);
+      }
+      return {
+        ...prev,
+        productIds: Array.from(selected),
+      };
+    });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -76,13 +82,13 @@ export default function OrderForm({ order, clients, products, onSuccess }: Props
     <form onSubmit={handleSubmit} className="space-y-4 text-white">
       {error && <p className="text-red-400 text-sm">{error}</p>}
 
-      <label className="block text-sm font-semibold">Cliente</label>
+      <label className="block text-sm text-title font-semibold">Cliente</label>
       <select
         name="clientId"
         value={formData.clientId}
         onChange={handleChange}
         required
-        className="w-full p-2 rounded bg-black/40 border border-white text-white"
+        className="w-full p-2 rounded bg-black/40 border border-[#c28f42] text-white"
       >
         <option value="">Selecciona un cliente</option>
         {clients.map((c) => (
@@ -92,19 +98,19 @@ export default function OrderForm({ order, clients, products, onSuccess }: Props
         ))}
       </select>
 
-      <label className="block text-sm font-semibold">Productos</label>
-      <select
-        multiple
-        value={formData.productIds}
-        onChange={handleProductSelection}
-        className="w-full p-2 rounded bg-black/40 border border-white text-white h-32"
-      >
+      <label className="block text-sm text-title font-semibold">Productos</label>
+      <div className="bg-black/40 p-3 rounded border border-[#c28f42] max-h-48 overflow-y-auto space-y-2">
         {products.map((p) => (
-          <option key={p.id} value={p.id}>
-            {p.name}
-          </option>
+          <label key={p.id} className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              checked={formData.productIds.includes(p.id)}
+              onChange={() => handleProductCheckbox(p.id)}
+            />
+            <span>{p.name}</span>
+          </label>
         ))}
-      </select>
+      </div>
 
       <Input
         label="Total (USD)"
@@ -116,12 +122,12 @@ export default function OrderForm({ order, clients, products, onSuccess }: Props
         required
       />
 
-      <label className="block text-sm font-semibold">Estado de pago</label>
+      <label className="block text-sm text-title font-semibold">Estado de pago</label>
       <select
         name="payment_status"
         value={formData.payment_status}
         onChange={handleChange}
-        className="w-full p-2 rounded bg-black/40 border border-white text-white"
+        className="w-full p-2 rounded bg-black/40 border border-[#c28f42] text-white"
       >
         {paymentOptions.map((status) => (
           <option key={status} value={status}>
@@ -130,7 +136,7 @@ export default function OrderForm({ order, clients, products, onSuccess }: Props
         ))}
       </select>
 
-      <Button type="submit" className="w-full bg-[#FFD700] hover:bg-[#e6c200] text-black">
+      <Button type="submit" className="w-full bg-[#c28f42] hover:bg-[#e6c200] text-black">
         {order ? "Actualizar pedido" : "Crear pedido"}
       </Button>
     </form>

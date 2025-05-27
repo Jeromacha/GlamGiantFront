@@ -50,8 +50,8 @@ export default function TestManagementPage() {
   return (
     <DashboardLayout>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-xl font-bold text-yellow-300">Pruebas de Producto</h1>
-        <Button onClick={handleCreate} className="bg-[#FFD700] hover:bg-[#e6c200] text-black">
+        <h1 className="text-xl font-bold text-title">Pruebas de Producto</h1>
+        <Button onClick={handleCreate} className="bg-[#DAA85B] hover:bg-[#DAA75B8B] text-black">
           Registrar prueba
         </Button>
       </div>
@@ -70,13 +70,21 @@ export default function TestManagementPage() {
             <td className="px-4 py-2 border-b text-white">
               {test.survival_status ? "✅" : "❌"}
             </td>
-            <td className="px-4 py-2 border-b text-white space-x-2">
-              <Button onClick={() => handleEdit(test)} className="bg-yellow-600 hover:bg-yellow-500 text-black">
-                Editar
-              </Button>
-              <Button onClick={() => handleDelete(test.id)} className="bg-red-600 hover:bg-red-500 text-white">
-                Eliminar
-              </Button>
+            <td className="px-4 py-2 border-b text-white">
+              <div className="flex gap-2">
+                <Button
+                  onClick={() => handleEdit(test)}
+                  className="bg-[#c28f42] hover:bg-[#e6c200] text-black"
+                >
+                  Editar
+                </Button>
+                <Button
+                  onClick={() => handleDelete(test.id)}
+                  className="bg-red-900 hover:bg-red-800 text-white"
+                >
+                  Eliminar
+                </Button>
+              </div>
             </td>
           </tr>
         ))}

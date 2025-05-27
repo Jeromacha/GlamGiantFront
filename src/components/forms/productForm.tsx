@@ -3,6 +3,7 @@ import Input from "@/components/ui/input";
 import Button from "@/components/ui/button";
 import { createProduct, updateProduct } from "@/services/productService";
 import { Product, ProductInput } from "@/types/product";
+import { ProductType } from "@/types/enums/productType";
 
 interface Props {
   product?: Product;
@@ -27,7 +28,9 @@ export default function ProductForm({ product, onSuccess }: Props) {
     }
   }, [product]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
@@ -54,7 +57,23 @@ export default function ProductForm({ product, onSuccess }: Props) {
   return (
     <form onSubmit={handleSubmit} className="space-y-4 text-white">
       <Input label="Nombre" name="name" value={formData.name} onChange={handleChange} required />
-      <Input label="Categoría" name="category" value={formData.category} onChange={handleChange} required />
+
+      <label className="block text-sm font-semibold text-title">Categoría</label>
+      <select
+        name="category"
+        value={formData.category}
+        onChange={handleChange}
+        required
+        className="w-full p-2 rounded bg-black/40 border border-[#c28f42] text-white"
+      >
+        <option value="">Selecciona una categoría</option>
+        {Object.values(ProductType).map((cat) => (
+          <option key={cat} value={cat}>
+            {cat}
+          </option>
+        ))}
+      </select>
+
       <Input label="Stock" name="stock" type="number" value={formData.stock} onChange={handleChange} required />
       <Input
         label="Ubicación en bodega"
@@ -93,7 +112,7 @@ export default function ProductForm({ product, onSuccess }: Props) {
         onChange={handleChange}
         required
       />
-      <Button type="submit" className="w-full bg-[#FFD700] text-black hover:bg-[#e6c200]">
+      <Button type="submit" className="w-full bg-[#c28f42] text-black hover:bg-[#c28f42]">
         {product ? "Actualizar producto" : "Crear producto"}
       </Button>
     </form>

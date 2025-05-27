@@ -8,7 +8,7 @@ import Table from "@/components/ui/table";
 import DashboardLayout from "../dashboard";
 import Button from "@/components/ui/button";
 import Modal from "@/components/ui/modal";
-import ProductForm from "@/components/product/productForm"; // Asegúrate que esté bien capitalizado
+import ProductForm from "@/components/forms/productForm"; // Asegúrate que esté bien capitalizado
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);
@@ -83,19 +83,21 @@ export default function ProductsPage() {
             <td className="px-4 py-2 border-b text-white">
               {product.magical_score}
             </td>
-            <td className="px-4 py-2 border-b text-white space-x-2">
-              <Button
-                onClick={() => handleEdit(product)}
-                className="bg-yellow-600 hover:bg-yellow-500 text-black"
-              >
-                Editar
-              </Button>
-              <Button
-                onClick={() => handleDelete(product.id)}
-                className="bg-red-600 hover:bg-red-500 text-white"
-              >
-                Eliminar
-              </Button>
+            <td className="px-4 py-2 border-b text-white">
+              <div className="flex gap-2">
+                <Button
+                  onClick={() => handleEdit(product)}
+                  className="bg-[#c28f42] hover:bg-[#e6c200] text-black"
+                >
+                  Editar
+                </Button>
+                <Button
+                  onClick={() => handleDelete(product.id)}
+                  className="bg-red-900 hover:bg-red-800 text-white"
+                >
+                  Eliminar
+                </Button>
+              </div>
             </td>
           </tr>
         ))}

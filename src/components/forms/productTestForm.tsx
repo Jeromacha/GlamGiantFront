@@ -81,7 +81,7 @@ export default function ProductTestForm({ test, testers, products, onSuccess }: 
         value={formData.tester_id}
         onChange={handleChange}
         required
-        className="w-full p-2 rounded bg-black/40 border border-white text-white"
+        className="w-full p-2 rounded bg-black/40 border border-[#c28f42] text-white"
       >
         <option value="">Seleccione un tester</option>
         {testers.map((t) => (
@@ -97,7 +97,7 @@ export default function ProductTestForm({ test, testers, products, onSuccess }: 
         value={formData.product_id}
         onChange={handleChange}
         required
-        className="w-full p-2 rounded bg-black/40 border border-white text-white"
+        className="w-full p-2 rounded bg-black/40 border border-[#c28f42] text-white"
       >
         <option value="">Seleccione un producto</option>
         {products.map((p) => (
@@ -136,7 +136,7 @@ export default function ProductTestForm({ test, testers, products, onSuccess }: 
         <span className="text-sm">¿Sobrevivió a la prueba?</span>
       </label>
 
-      <Button type="submit" className="w-full bg-[#FFD700] hover:bg-[#e6c200] text-black">
+      <Button type="submit" className="w-full bg-[#c28f42] hover:bg-[#c28f42] text-black">
         {test ? "Actualizar prueba" : "Registrar prueba"}
       </Button>
     </form>

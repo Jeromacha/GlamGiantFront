@@ -99,15 +99,15 @@ export default function UserForm({ user, onSuccess }: Props) {
       <Input label="Correo" name="email" value={formData.email} onChange={handleChange} required type="email" />
       <Input label="Contraseña" name="password" value={formData.password} onChange={handleChange} required type="password" />
 
-      <label className="block text-sm font-semibold">Rol</label>
-      <select name="rol" value={formData.rol} onChange={handleChange} className="w-full p-2 rounded bg-black/40 border border-white text-white">
+      <label className="block text-sm text-title font-semibold">Rol</label>
+      <select name="rol" value={formData.rol} onChange={handleChange} className="w-full p-2 rounded bg-black/40 border border-[#c28f42] text-white">
         {roles.map((role) => (
           <option key={role} value={role}>{role}</option>
         ))}
       </select>
 
-      <label className="block text-sm font-semibold">Tipo de Tester</label>
-      <select name="tester_type" value={formData.tester_type} onChange={handleChange} className="w-full p-2 rounded bg-black/40 border border-white text-white">
+      <label className="block text-sm text-title font-semibold">Tipo de Tester</label>
+      <select name="tester_type" value={formData.tester_type} onChange={handleChange} className="w-full p-2 rounded bg-black/40 border border-[#c28f42] text-white">
         <option value="">Ninguno</option>
         {testerTypes.map((type) => (
           <option key={type} value={type}>{type}</option>
@@ -138,7 +138,7 @@ export default function UserForm({ user, onSuccess }: Props) {
         onChange={handleChange}
       />
 
-      <Button type="submit" className="w-full bg-[#FFD700] hover:bg-[#e6c200] text-black">
+      <Button type="submit" className="w-full bg-[#c28f42] hover:bg-[#c28f42] text-black">
         {user ? "Actualizar usuario" : "Crear usuario"}
       </Button>
     </form>

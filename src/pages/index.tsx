@@ -12,13 +12,11 @@ export default function HomePage() {
         <p className="mb-12 text-lg max-w-xl text-center text-subtle-glow">
           Tu plataforma para controlar todo el imperio de maquillaje con ética y poder.
         </p>
-        <nav className="flex flex-col gap-5 items-center">
+        <nav className="flex flex-col gap-5 items-center text-3xl">
           <Link href="/login" className="btn-link">
             Iniciar sesión
           </Link>
-          <Link href="/register" className="btn-link">
-            Crear cuenta
-          </Link>
+          
           
         </nav>
       </div>

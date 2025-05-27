@@ -47,10 +47,10 @@ export default function UsersPage() {
   return (
     <DashboardLayout>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-xl font-bold text-yellow-300">Usuarios</h1>
+        <h1 className="text-xl font-bold text-title">Usuarios</h1>
         <Button
           onClick={handleCreate}
-          className="bg-[#FFD700] hover:bg-[#e6c200] text-black"
+          className="bg-[#DAA85B] hover:bg-[#e6c200] text-black"
         >
           Agregar usuario
         </Button>
@@ -66,13 +66,13 @@ export default function UsersPage() {
               <div className="flex gap-2">
                 <Button
                   onClick={() => handleEdit(user)}
-                  className="bg-yellow-600 hover:bg-yellow-500 text-black"
+                  className="bg-[#c28f42] hover:bg-[#e6c200] text-black"
                 >
                   Editar
                 </Button>
                 <Button
                   onClick={() => handleDelete(user.id)}
-                  className="bg-red-600 hover:bg-red-500 text-white"
+                  className="bg-red-900 hover:bg-red-800 text-white"
                 >
                   Eliminar
                 </Button>

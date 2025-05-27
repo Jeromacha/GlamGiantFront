@@ -24,7 +24,7 @@ export default function OrdersPage() {
       getAllProducts(),
     ]);
     setOrders(orderList);
-    setClients(userList); // podrías filtrar por rol CLIENT si es necesario
+    setClients(userList); // Puedes filtrar por CLIENT si quieres
     setProducts(productList);
   };
 
@@ -50,8 +50,8 @@ export default function OrdersPage() {
   return (
     <DashboardLayout>
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-xl font-bold text-yellow-300">Pedidos</h1>
-        <Button onClick={handleCreate} className="bg-[#FFD700] hover:bg-[#e6c200] text-black">
+        <h1 className="text-xl font-bold text-title">Pedidos</h1>
+        <Button onClick={handleCreate} className="bg-[#DAA85B] hover:bg-[#e6c200] text-black">
           Crear pedido
         </Button>
       </div>
@@ -67,19 +67,21 @@ export default function OrdersPage() {
             </td>
             <td className="px-4 py-2 border-b text-white">${order.total_amount}</td>
             <td className="px-4 py-2 border-b text-white">{order.payment_status}</td>
-            <td className="px-4 py-2 border-b text-white space-x-2">
-              <Button
-                onClick={() => handleEdit(order)}
-                className="bg-yellow-600 hover:bg-yellow-500 text-black"
-              >
-                Editar
-              </Button>
-              <Button
-                onClick={() => handleDelete(order.id)}
-                className="bg-red-600 hover:bg-red-500 text-white"
-              >
-                Eliminar
-              </Button>
+            <td className="px-4 py-2 border-b text-white">
+              <div className="flex gap-2">
+                <Button
+                  onClick={() => handleEdit(order)}
+                  className="bg-[#c28f42] hover:bg-[#e6c200] text-black"
+                >
+                  Editar
+                </Button>
+                <Button
+                  onClick={() => handleDelete(order.id)}
+                  className="bg-red-900 hover:bg-red-800 text-white"
+                >
+                  Eliminar
+                </Button>
+              </div>
             </td>
           </tr>
         ))}
