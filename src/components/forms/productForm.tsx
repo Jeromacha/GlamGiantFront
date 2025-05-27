@@ -13,7 +13,7 @@ interface Props {
 export default function ProductForm({ product, onSuccess }: Props) {
   const [formData, setFormData] = useState<ProductInput>({
     name: "",
-    category: "" as ProductType,
+    category: "",
     stock: 0,
     warehouse_location: "",
     durability_score: 0,
@@ -23,15 +23,12 @@ export default function ProductForm({ product, onSuccess }: Props) {
 
   useEffect(() => {
     if (product) {
-      const { id, ...rest } = product;
-
-      // ⚠️ Convertir category a tipo ProductType
-      const correctedCategory = Object.values(ProductType).includes(rest.category as ProductType)
-        ? (rest.category as ProductType)
+      const correctedCategory = Object.values(ProductType).includes(product.category as ProductType)
+        ? (product.category as ProductType)
         : "Lipstick";
 
       setFormData({
-        ...rest,
+        ...product,
         category: correctedCategory,
       });
     }
@@ -59,8 +56,7 @@ export default function ProductForm({ product, onSuccess }: Props) {
       }
       onSuccess();
     } catch (err: unknown) {
-      const error = err as { response?: { data: string }; message: string };
-      console.error("Error al guardar producto:", error.response?.data || error.message);
+      console.error("Error al guardar producto:", (err as any).response?.data || (err as Error).message);
     }
   };
 
