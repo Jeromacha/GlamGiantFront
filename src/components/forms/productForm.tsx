@@ -56,16 +56,8 @@ export default function ProductForm({ product, onSuccess }: Props) {
       }
       onSuccess();
     } catch (err: unknown) {
-      if (
-        typeof err === "object" &&
-        err !== null &&
-        "response" in err &&
-        typeof (err as any).response === "object"
-      ) {
-        console.error("Error al guardar producto:", (err as any).response?.data);
-      } else {
-        console.error("Error inesperado:", err);
-      }
+      const error = err as { response?: { data: string }; message: string };
+      console.error("Error al guardar producto:", error.response?.data || error.message);
     }
   };
 
