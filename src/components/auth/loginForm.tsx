@@ -21,7 +21,7 @@ export default function LoginForm() {
       // Guardar token
       localStorage.setItem("token", res.access_token);
 
-      // Guardar rol en localStorage 
+      // Guardar rol
       localStorage.setItem("rol", res.user.rol);
 
       // Redirección según el rol
@@ -30,9 +30,15 @@ export default function LoginForm() {
       } else {
         router.push("/dashboard/default");
       }
-    } catch (err: any) {
-      console.error("Error login:", err.response?.data || err.message);
-      setError("Credenciales inválidas o error del servidor.");
+    } catch (err: unknown) {
+      if (typeof err === "object" && err !== null && "response" in err) {
+        const axiosErr = err as { response?: { data?: { message?: string } }, message?: string };
+        console.error("Error login:", axiosErr.response?.data || axiosErr.message);
+        setError("Credenciales inválidas o error del servidor.");
+      } else {
+        console.error("Error inesperado:", err);
+        setError("Error inesperado al iniciar sesión.");
+      }
     }
   };
 

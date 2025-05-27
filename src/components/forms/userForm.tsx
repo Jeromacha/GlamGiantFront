@@ -31,7 +31,7 @@ export default function UserForm({ user, onSuccess }: Props) {
   useEffect(() => {
     if (user) {
       setFormData({
-        nombre: user.nombre|| "",
+        nombre: user.nombre || "",
         email: user.email || "",
         password: "",
         rol: user.rol || "CLIENT",
@@ -63,7 +63,7 @@ export default function UserForm({ user, onSuccess }: Props) {
     e.preventDefault();
     setError("");
 
-    const dataToSend: any = {
+    const dataToSend: Partial<User> = {
       ...formData,
       rol: formData.rol as UserRole,
       purchase_history: formData.purchase_history
@@ -71,7 +71,6 @@ export default function UserForm({ user, onSuccess }: Props) {
         : [],
     };
 
-    // ✅ Solo agregar tester_type si tiene valor, si no, eliminarlo
     if (formData.tester_type) {
       dataToSend.tester_type = formData.tester_type as TesterType;
     } else {
@@ -85,9 +84,15 @@ export default function UserForm({ user, onSuccess }: Props) {
         await createUser(dataToSend);
       }
       onSuccess();
-    } catch (err: any) {
-      console.error("❌ Error al guardar usuario:", err.response?.data || err.message);
-      setError("Error al guardar usuario: " + (err.response?.data?.message || err.message));
+    } catch (err: unknown) {
+      if (typeof err === "object" && err !== null && "response" in err) {
+        const axiosError = err as { response?: { data?: { message?: string } } };
+        setError("Error al guardar usuario: " + (axiosError.response?.data?.message || "Error desconocido"));
+        console.error("❌ Error al guardar usuario:", axiosError.response?.data || err);
+      } else {
+        setError("Error inesperado");
+        console.error("❌ Error inesperado:", err);
+      }
     }
   };
 

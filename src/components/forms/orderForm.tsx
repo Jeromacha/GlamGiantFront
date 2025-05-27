@@ -72,9 +72,15 @@ export default function OrderForm({ order, clients, products, onSuccess }: Props
         await createOrder(formData);
       }
       onSuccess();
-    } catch (err: any) {
-      console.error("❌ Error al guardar pedido:", err.response?.data || err.message);
-      setError("Error al guardar pedido: " + (err.response?.data?.message || err.message));
+    } catch (err: unknown) {
+      if (typeof err === "object" && err !== null && "response" in err) {
+        const axiosErr = err as { response?: { data?: { message?: string } }, message?: string };
+        console.error("❌ Error al guardar pedido:", axiosErr.response?.data || axiosErr.message);
+        setError("Error al guardar pedido: " + (axiosErr.response?.data?.message || axiosErr.message));
+      } else {
+        console.error("❌ Error inesperado al guardar pedido:", err);
+        setError("Error inesperado al guardar pedido.");
+      }
     }
   };
 

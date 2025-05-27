@@ -23,7 +23,7 @@ export default function ProductForm({ product, onSuccess }: Props) {
 
   useEffect(() => {
     if (product) {
-      const { id, ...rest } = product;
+      const { ...rest } = product;
       setFormData(rest);
     }
   }, [product]);
@@ -49,8 +49,13 @@ export default function ProductForm({ product, onSuccess }: Props) {
         await createProduct(formData);
       }
       onSuccess();
-    } catch (err: any) {
-      console.error("Error al guardar producto:", err.response?.data || err.message);
+    } catch (err: unknown) {
+      if (typeof err === "object" && err !== null && "response" in err) {
+        const axiosErr = err as { response?: { data?: { message?: string } }, message?: string };
+        console.error("Error al guardar producto:", axiosErr.response?.data || axiosErr.message);
+      } else {
+        console.error("Error desconocido al guardar producto:", err);
+      }
     }
   };
 

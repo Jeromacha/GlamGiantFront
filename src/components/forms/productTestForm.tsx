@@ -65,9 +65,16 @@ export default function ProductTestForm({ test, testers, products, onSuccess }: 
         await createProductTest(formData);
       }
       onSuccess();
-    } catch (err: any) {
-      console.error("❌ Error al guardar prueba:", err.response?.data || err.message);
-      setError("Error al guardar prueba: " + (err.response?.data?.message || err.message));
+    } catch (err: unknown) {
+      let errorMsg = "Error al guardar prueba";
+
+      if (typeof err === "object" && err !== null && "response" in err) {
+        const axiosError = err as { response?: { data?: { message?: string } } };
+        errorMsg = axiosError.response?.data?.message || errorMsg;
+      }
+
+      console.error("❌ Error al guardar prueba:", err);
+      setError(errorMsg);
     }
   };
 
@@ -86,7 +93,7 @@ export default function ProductTestForm({ test, testers, products, onSuccess }: 
         <option value="">Seleccione un tester</option>
         {testers.map((t) => (
           <option key={t.id} value={t.id}>
-            {t.nombre || t.nombre} ({t.email})
+            {t.nombre} ({t.email})
           </option>
         ))}
       </select>
