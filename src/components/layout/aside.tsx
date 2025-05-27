@@ -14,8 +14,12 @@ export default function Sidebar() {
 
   return (
     <aside className="h-screen w-64 bg-black p-4 border-r border-[#DAA85B] fixed top-0 left-0 text-white">
-      <h2 className="text-lg font-bold mb-6 text-title">GlamGiant</h2>
-      <nav className="flex flex-col gap-4">
+    <Link
+        href="/dashboard/admin"
+        className="text-lg font-bold mb-6 text-title hover:underline block">
+        GlamGiant
+        </Link>      
+        <nav className="flex flex-col gap-4">
         {links.map((link) => (
           <Link
             key={link.href}
