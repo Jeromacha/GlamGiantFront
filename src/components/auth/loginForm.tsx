@@ -18,13 +18,13 @@ export default function LoginForm() {
     try {
       const res = await login(email, password);
 
-      // ✅ Guardar token
+      // Guardar token
       localStorage.setItem("token", res.access_token);
 
-      // ✅ Guardar rol en localStorage (opcional)
+      // Guardar rol en localStorage 
       localStorage.setItem("rol", res.user.rol);
 
-      // ✅ Redirección según el rol
+      // Redirección según el rol
       if (res.user.rol === "ADMIN") {
         router.push("/dashboard/admin");
       } else {
