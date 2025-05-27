@@ -8,7 +8,7 @@ export interface Order {
   clientId?: string;
   productIds?: string[];
   total_amount: number;
-  payment_status: "PENDING" | "PAID" | "FAILED";
+  payment_status: "Refunded" | "Paid" | "Failed";
 
   client?: {
     id: string;

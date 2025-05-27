@@ -13,14 +13,14 @@ interface Props {
 }
 
 
-const paymentOptions = ["PAID", "PENDING", "FAILED"];
+const paymentOptions = ["Paid", "Refunded", "Failed"];
 
 export default function OrderForm({ order, clients, products, onSuccess }: Props) {
   const [formData, setFormData] = useState({
     clientId: "",
     productIds: [] as string[],
     total_amount: 0,
-    payment_status: "PAID" as "PAID" | "PENDING" | "FAILED",
+    payment_status: "Paid" as "Paid" | "Refunded" | "Failed",
   });
 
   const [error, setError] = useState("");
@@ -31,7 +31,7 @@ export default function OrderForm({ order, clients, products, onSuccess }: Props
         clientId: order.client?.id || "",
         productIds: order.products?.map((p) => p.id) || [],
         total_amount: Number(order.total_amount) || 0,
-        payment_status: order.payment_status as "PAID" | "PENDING" | "FAILED",
+        payment_status: order.payment_status as "Paid" | "Refunded" | "Failed",
       });
     }
   }, [order]);
