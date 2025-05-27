@@ -21,10 +21,15 @@ export default function LoginForm() {
       // ✅ Guardar token
       localStorage.setItem("token", res.access_token);
 
-      console.log("Login exitoso:", res);
+      // ✅ Guardar rol en localStorage (opcional)
+      localStorage.setItem("rol", res.user.rol);
 
-      // ✅ Redirigir al dashboard
-      router.push("/dashboard/admin");
+      // ✅ Redirección según el rol
+      if (res.user.rol === "ADMIN") {
+        router.push("/dashboard/admin");
+      } else {
+        router.push("/dashboard/default");
+      }
     } catch (err: any) {
       console.error("Error login:", err.response?.data || err.message);
       setError("Credenciales inválidas o error del servidor.");
@@ -48,10 +53,7 @@ export default function LoginForm() {
         required
       />
       {error && <p className="text-red-400 text-sm">{error}</p>}
-      <Button
-        type="submit"
-        className="w-full  text-black"
-      >
+      <Button type="submit" className="w-full text-black bg-[#FFD700] hover:bg-[#e6c200]">
         Iniciar sesión
       </Button>
     </form>
