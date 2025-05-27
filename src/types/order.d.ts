@@ -1,5 +1,5 @@
 
-export type PaymentStatus = "Paid" | "Refunded" | "Failed";
+export type PaymentStatus = "PAID" | "REFUNDED" | "FAILED";
 
 export interface Order {
   id: string;
