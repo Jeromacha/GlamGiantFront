@@ -59,7 +59,7 @@ export default function LoginForm() {
         required
       />
       {error && <p className="text-red-400 text-sm">{error}</p>}
-      <Button type="submit" className="w-full text-black bg-[#FFD700] hover:bg-[#e6c200]">
+      <Button type="submit" className="w-full text-black bg-[#c28f42] hover:bg-[#c28f42]">
         Iniciar sesión
       </Button>
     </form>

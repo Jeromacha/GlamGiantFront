@@ -21,16 +21,12 @@ export default function ProductForm({ product, onSuccess }: Props) {
     magical_score: 0,
   });
 
+  const [error, setError] = useState("");
+
   useEffect(() => {
     if (product) {
-      const correctedCategory = Object.values(ProductType).includes(product.category as ProductType)
-        ? (product.category as ProductType)
-        : "Lipstick";
-
-      setFormData({
-        ...product,
-        category: correctedCategory,
-      });
+      const { id, ...rest } = product;
+      setFormData(rest);
     }
   }, [product]);
 
@@ -48,6 +44,8 @@ export default function ProductForm({ product, onSuccess }: Props) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
+
     try {
       if (product) {
         await updateProduct(product.id, formData);
@@ -55,14 +53,19 @@ export default function ProductForm({ product, onSuccess }: Props) {
         await createProduct(formData);
       }
       onSuccess();
-    } catch (err: unknown) {
-      const error = err as { response?: { data: string }; message: string };
-      console.error("Error al guardar producto:", error.response?.data || error.message);
+    } catch (err) {
+      // Sin tipos estrictos
+      const errorMessage =
+        (err as any)?.response?.data?.message || "Error inesperado al guardar el producto.";
+      setError(errorMessage);
+      console.error("❌ Error al guardar producto:", err);
     }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-4 text-white">
+      {error && <p className="text-red-400 text-sm">{error}</p>}
+
       <Input label="Nombre" name="name" value={formData.name} onChange={handleChange} required />
 
       <label className="block text-sm font-semibold text-title">Categoría</label>
@@ -81,7 +84,14 @@ export default function ProductForm({ product, onSuccess }: Props) {
         ))}
       </select>
 
-      <Input label="Stock" name="stock" type="number" value={formData.stock} onChange={handleChange} required />
+      <Input
+        label="Stock"
+        name="stock"
+        type="number"
+        value={formData.stock}
+        onChange={handleChange}
+        required
+      />
       <Input
         label="Ubicación en bodega"
         name="warehouse_location"
