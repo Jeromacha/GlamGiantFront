@@ -21,7 +21,6 @@ export interface Order {
   }[];
 }
 
-// 🔐 Configuración con token desde localStorage
 const getAuthConfig = () => {
   const token = localStorage.getItem("token");
   return {

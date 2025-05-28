@@ -1,9 +1,9 @@
-// src/services/authService.ts
+
 import axios from "axios";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-// Define aquí la forma de la respuesta de login
+
 export interface LoginResponse {
   access_token: string;
   user: {

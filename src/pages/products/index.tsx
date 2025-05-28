@@ -8,7 +8,7 @@ import Table from "@/components/ui/table";
 import DashboardLayout from "../dashboard";
 import Button from "@/components/ui/button";
 import Modal from "@/components/ui/modal";
-import ProductForm from "@/components/forms/productForm"; // Asegúrate que esté bien capitalizado
+import ProductForm from "@/components/forms/productForm"; 
 
 export default function ProductsPage() {
   const [products, setProducts] = useState<Product[]>([]);

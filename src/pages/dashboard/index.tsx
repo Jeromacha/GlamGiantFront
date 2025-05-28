@@ -22,13 +22,10 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
     setLoading(false);
   }, [router]);
 
-  // 🔄 Mientras carga/verifica, no mostramos nada
   if (loading) return null;
 
-  // ⛔ Si no es admin, no renderizamos el layout (redirigido arriba)
   if (!authorized) return null;
 
-  // ✅ Si es admin, renderizamos normalmente
   return (
     <div className="flex">
       <Sidebar />

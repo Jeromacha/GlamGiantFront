@@ -9,5 +9,4 @@ export interface Product {
   magical_score: number;
 }
 
-// Tipo para crear/editar productos (sin ID)
 export type ProductInput = Omit<Product, "id">;

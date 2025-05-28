@@ -24,7 +24,7 @@ export default function OrdersPage() {
       getAllProducts(),
     ]);
     setOrders(orderList);
-    setClients(userList); // Puedes filtrar por CLIENT si quieres
+    setClients(userList); 
     setProducts(productList);
   };
 
