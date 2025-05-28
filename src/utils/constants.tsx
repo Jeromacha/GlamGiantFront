@@ -10,8 +10,6 @@ export const PRODUCT_CATEGORIES = [
   "Lipstick",
   "Foundation",
   "Eyeshadow",
-  "Mascara",
-  "Blush",
 ];
 
 export const PAYMENT_STATUSES = ["Paid", "Refunded", "Failed"];
